@@ -1,0 +1,88 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}datalegend Graph Management Console{% endblock %}
+{% block metas %}
+<meta name="google-signin-client_id" content="693352032871-11385rcadjcf688bojnp2hr998g0llpm.apps.googleusercontent.com">
+{% endblock %}
+
+{% block navbar %}
+<bla></bla>
+{% endblock %}
+
+{% block content %}
+
+<div class='container'>
+  <div class="row">
+    <div class="col-md-12">
+      <div class='page-header'>
+          <h1><strong>data</strong>legend Graph Management Console</h1>
+      </div>
+
+
+        {% for group in datasets|groupby('ds') %}
+            <h5><a href="{{group.grouper}}" target="_blank">{{group.grouper}}</a></h5>
+            <ul class="list-group">
+            {% for g in group.list %}
+                <li class="list-group-item" data-graphs='{{g|tojson}}'>
+                  {{g['np']}}
+                </li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+
+        <div class="btn btn-warning" id="generate_button">Generate SPARQL Query</div>
+        <div id="sparql"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<script src='//cdn.jsdelivr.net/yasqe/2.11.9/yasqe.bundled.min.js'></script>
+<script>
+
+$(function() {
+
+  var yasqe = YASQE(document.getElementById("sparql"), settings={'endpoint': '{{endpoint}}'});
+
+  $('.list-group-item').on('click', function(e){
+    var item = $(this);
+    item.toggleClass('list-group-item-danger');
+    console.log(item.attr('data-graphs'));
+  });
+
+  $('#generate_button').on('click', function(e){
+    var queries = "";
+    $('.list-group-item-danger').each(function(index){
+      var dsdata = $(this).attr('data-graphs');
+      var dataset = $.parseJSON(dsdata);
+      var query = "CLEAR GRAPH <"+ dataset.a +">\n" +
+                  "CLEAR GRAPH <"+ dataset.p +">\n" +
+                  "CLEAR GRAPH <"+ dataset.pi +">\n" +
+                  "DELETE WHERE { GRAPH ?g { <"+ dataset.np +"> ?p ?o } }\n\n";
+      queries += query;
+    });
+
+    yasqe.setValue(queries);
+
+  })
+});
+
+
+
+</script>
+
+
+
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link href='//cdn.jsdelivr.net/yasqe/2.11.9/yasqe.min.css' rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" href="{{url_for('.static', filename='bootstrap.min.css')}}" />
+<link rel="stylesheet" href="{{url_for('.static', filename='qber.css')}}" />
+
+{% endblock %}

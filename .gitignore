@@ -1,0 +1,7 @@
+lib/*
+bin/*
+include/*
+*.pyc
+.Python
+pip-selfcheck.json
+.ipynb_checkpoints/*

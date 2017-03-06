@@ -1,0 +1,283 @@
+/*@import url(http://fonts.googleapis.com/css?family=Signika:400,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,500,700,400italic,500italic,700italic,300italic,300);*/
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+  padding-top: 50px;
+  position: relative;
+	font-family: 'Varela Round';
+  /*font-weight: 300;
+	color: #273142; */
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 60px;
+    position: relative;
+    overflow: scroll;
+  }
+}
+
+.small, small {
+  font-size: 75%;
+}
+
+div#welcome_body {
+  height: 1200px;
+/*  background-color: #E0E4CC; */
+  background: url('../img/desert-1050x884.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+div#qber_body {
+  height: 1200px;
+/*  background-color: #E0E4CC; */
+  background: url('../img/desert-1050x884.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+section#dataset_panel{
+  /*background-color: white;*/
+  overflow-x: scroll;
+}
+
+div#values_table {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  overflow: scroll;
+}
+
+.data-col {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.data-head {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  width: @text-width;
+  padding: 10px 17px;
+  font-weight: bold;
+  /* margin-left: 2px; */
+  background-color: #dddddd
+}
+
+.data-head:hover {
+  text-decoration: none;
+  background-color: #bbbbbb
+}
+
+.data-cell {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  width: @text-width;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-left: 2px;
+  padding: 10px 15px
+}
+
+.data-cell-active {
+  border: 1px solid #eeeeee;
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+
+.data-cell:hover {
+  border: 1px solid #dddddd;
+  text-decoration: none;
+  background-color: #dddddd;
+}
+
+
+.data-link {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.data-label {
+  padding-right: 5px;
+  text-align: left;
+  flex-grow: 8;
+}
+
+.welcome {
+  margin-top: 150px;
+  text-align: center;
+}
+.welcome-well {
+  height: 250px;
+}
+
+.welcome-well img {
+  float: right;
+}
+
+nav {
+  background-color: white;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  width: 100%;
+}
+
+.user-depiction {
+  height: 18px;
+  margin-right: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+span.pill-icon {
+  padding-right: 1em;
+}
+
+/*
+ * MessagePanel
+ */
+
+.message-panel {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 9999;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  /*background-color: #f5f5f5;
+  border-right: 1px solid #eee;*/
+}
+
+.message {
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0px;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+/* overlay styles, all needed */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9000;
+}
+
+.qber-modal {
+    position: fixed;
+    top: 150px;
+    bottom: 100px;
+    left: 100px;
+    right: 100px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    /*background-color: white;*/
+    border-radius: 5px;
+    overflow: auto;
+    padding: 2em;
+    z-index: 9001; /* 1px higher than the overlay layer */
+}
+
+.slim-modal {
+    position: fixed;
+    top: 150px;
+    bottom: 100px;
+    left: 200px;
+    right: 200px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: white;
+    border-radius: 5px;
+    overflow: auto;
+    padding: 2em;
+    z-index: 9001; /* 1px higher than the overlay layer */
+}
+
+
+
+h1, h2, h3, h4, h5, h6, nav {
+  font-family: 'Varela Round';
+}
+
+.btn-space {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.div-csv {
+  margin-top: 20px;
+}
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+   color: black;
+}
