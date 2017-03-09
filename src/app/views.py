@@ -9,5 +9,5 @@ ENDPOINT = "YOUR ENDPOINT HERE"
 def index():
     datasets = get_datasets()
 
-    app.logger.debug(datasets)
+    # app.logger.debug(datasets)
     return render_template('index.html', datasets=datasets, endpoint=ENDPOINT)

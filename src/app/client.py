@@ -18,10 +18,13 @@ SELECT DISTINCT ?np ?pi ?a ?p ?ds WHERE {{
         np:hasPublicationInfo ?pi ;
         np:hasAssertion ?a ;
         np:hasProvenance ?p .
-    GRAPH ?a {{
-   	    ?ds a qb:DataSet .
+    OPTIONAL {{
+        GRAPH ?a {{
+   	        ?dst a qb:DataSet .
+        }}
     }}
-}} ORDER BY ?ds OFFSET {}
+    BIND(IF(bound(?dst), ?dst, "noname") AS ?ds)
+}} ORDER BY ?ds, ?np LIMIT 100 OFFSET {}
 """
 
 
@@ -43,9 +46,10 @@ def get_datasets():
                 dataset_result[k] = r[k]['value']
             datasets.append(dataset_result)
 
+        print "Retrieved {} datasets".format(len(datasets))
         if len(datasets) < 1:
             break
-        print datasets
+        # print datasets
         all_datasets += datasets
         offset += 100
 
