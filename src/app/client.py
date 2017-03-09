@@ -21,7 +21,7 @@ SELECT DISTINCT ?np ?pi ?a ?p ?ds WHERE {{
     GRAPH ?a {{
    	    ?ds a qb:DataSet .
     }}
-}} ORDER BY ?ds LIMIT 100 OFFSET {}
+}} ORDER BY ?ds OFFSET {}
 """
 
 
